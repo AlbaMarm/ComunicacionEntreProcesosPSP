@@ -3,16 +3,17 @@ import java.io.*;
 public class Tuberia {
     public static void main(String[] args) {
 
-        //String comando="NOTEPAD";
+        //Procesos para ejecutar
         String[] comando1 = {"CMD", "/C", "Tasklist"};
         String[] comando2 = {"CMD", "/C", "findstr", "chrome.exe"};
 
         try
         {
+            //primer comando
             ProcessBuilder pb = new ProcessBuilder(comando1);
-            //tub.inheritIO();
             Process proceso = pb.start();
 
+            //salida 1º proceso
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(proceso.getInputStream())
             );
@@ -20,6 +21,7 @@ public class Tuberia {
             ProcessBuilder pb2 = new ProcessBuilder(comando2);
             Process proceso2 = pb2.start();
 
+            //escritor para enviarle al 2º proceso
             BufferedWriter bw = new BufferedWriter(
                     new OutputStreamWriter(proceso2.getOutputStream())
             );
@@ -33,6 +35,7 @@ public class Tuberia {
             bw.flush();
             bw.close();
 
+            //leemos salida del 2º proceso
             BufferedReader br2 =new BufferedReader(
                     new InputStreamReader(proceso2.getInputStream())
             );
